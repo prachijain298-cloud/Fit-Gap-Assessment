@@ -738,20 +738,33 @@ dialog::backdrop {
 
 .wk {
   display: grid;
-  grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
-  gap: 20px;
+  gap: 16px;
   padding: 16px 16px 20px 19px;
   border-bottom: 1px solid var(--line);
   background: var(--surface-2);
 }
 
+.wk-top {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(0, 2fr);
+  gap: 20px;
+}
+
 .wk h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0 0 10px;
   font-size: 12px;
   font-weight: 650;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--ink-3);
+}
+
+.wk h4 .chip {
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .wk-sec {
@@ -762,40 +775,120 @@ dialog::backdrop {
   padding: 14px 16px;
   border: 1px dashed var(--line);
   border-radius: 8px;
-  background: transparent;
-  color: var(--ink-2);
+  color: var(--ink-3);
   align-self: start;
 }
 
-.wk-prev-top {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.wk-prev .tag {
+  opacity: 0.8;
 }
 
-.wk-prev-reason {
-  margin: 8px 0;
+.wk-c {
+  margin: 8px 0 6px;
   font-size: 13px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
-.wk-meta {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 2px 12px;
-  margin: 0;
+.wk-m {
   font-size: 12px;
 }
 
-.wk-meta dt {
+.wk-first {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.wk-ref {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--line-2);
+  font-size: 12px;
+}
+
+.wk-edited {
+  color: var(--partial);
+  font-weight: 600;
+}
+
+.wk-cur-h {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wk-changed {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--partial-bg);
+  color: #7c4d00;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.wk-view .wk-c {
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.tag.big {
+  padding: 4px 12px;
+  font-size: 14px;
+}
+
+.wk-note {
+  margin: 0 0 10px;
+  font-size: 12px;
+}
+
+.wk-req {
+  margin-left: 6px;
+  color: var(--nofit);
+  font-weight: 650;
+}
+
+.wk-under {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.wk-err {
+  color: var(--nofit);
+  font-weight: 600;
+}
+
+.wk-count {
+  margin-left: auto;
   color: var(--ink-3);
 }
 
-.wk-meta dd {
-  margin: 0;
+.wk-count.over {
+  color: var(--partial);
+  font-weight: 600;
+}
+
+.wk-reason.invalid {
+  border-color: var(--nofit);
+  outline: 2px solid rgb(178 59 53 / 16%);
+}
+
+.wk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.wk-foot .wk-actions {
+  margin-top: 0;
 }
 
 .wk-hist {
-  margin-top: 12px;
   font-size: 12px;
 }
 
@@ -805,12 +898,21 @@ dialog::backdrop {
   font-weight: 600;
 }
 
-.wk-h {
+.wk-hl {
   display: grid;
-  gap: 2px;
-  padding: 8px 0;
+  gap: 0;
+  margin-top: 8px;
+}
+
+.wk-h {
+  padding: 10px 0;
   border-top: 1px solid var(--line-2);
-  margin-top: 6px;
+}
+
+.wk-h-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .wk-cur {
@@ -911,11 +1013,6 @@ dialog::backdrop {
   width: 200px;
 }
 
-.wk-actions {
-  display: flex;
-  gap: 8px;
-}
-
 .wk-actions .btn-primary {
   min-width: 130px;
 }
@@ -936,7 +1033,7 @@ dialog::backdrop {
 }
 
 @media (max-width: 980px) {
-  .wk {
+  .wk-top {
     grid-template-columns: minmax(0, 1fr);
   }
 
