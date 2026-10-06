@@ -929,7 +929,7 @@ dialog::backdrop {
 
 .wk-opts {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -969,11 +969,6 @@ dialog::backdrop {
 .wk-opt[data-r="N"][aria-pressed="true"] {
   background: var(--nofit);
   box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--nofit);
-}
-
-.wk-opt[data-r="A"][aria-pressed="true"] {
-  background: var(--ink-2);
-  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink-2);
 }
 
 .wk-lbl {
@@ -1023,21 +1018,10 @@ dialog::backdrop {
   font-size: 12px;
 }
 
-.tag.A {
-  background: var(--line-2);
-  color: var(--ink-2);
-}
-
-.rate button[data-r="A"] {
-  display: none;
-}
-
 @media (max-width: 980px) {
   .wk-top {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .wk-opts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+
 }
