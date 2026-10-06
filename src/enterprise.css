@@ -51,6 +51,10 @@
   }
 }
 
+html {
+  zoom: 1.25;
+}
+
 body {
   min-width: 768px;
   background: var(--bg);
@@ -382,7 +386,7 @@ tbody tr:hover {
 
 .tree {
   top: 72px;
-  max-height: calc(100vh - 96px);
+  max-height: calc(100vh / 1.25 - 96px);
   padding: 8px;
   border-radius: 8px;
 }
