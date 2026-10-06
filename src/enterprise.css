@@ -1025,3 +1025,23 @@ dialog::backdrop {
 
 
 }
+
+/* Radio / checkbox alignment with their labels */
+input[type="radio"],
+input[type="checkbox"] {
+  min-height: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex: none;
+  accent-color: var(--accent);
+}
+
+.radio-row label {
+  align-items: center;
+  min-height: 28px;
+}
+
+.radio-row input {
+  margin-top: 0;
+}
