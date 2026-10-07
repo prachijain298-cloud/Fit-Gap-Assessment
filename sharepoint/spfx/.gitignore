@@ -1,0 +1,9 @@
+node_modules
+lib
+dist
+temp
+release
+solution
+sharepoint
+src/app/appHtml.ts
+*.sppkg

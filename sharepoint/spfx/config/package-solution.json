@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "fit-gap-assessment-client-side-solution",
+    "id": "b2a5c0d4-3e7f-4f0a-8c61-5d9e1a7b2c33",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.23.2"
+    }
+  },
+  "paths": {
+    "zippedPackage": "solution/fit-gap-assessment.sppkg"
+  }
+}

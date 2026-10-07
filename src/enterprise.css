@@ -1045,3 +1045,7 @@ input[type="checkbox"] {
 .radio-row input {
   margin-top: 0;
 }
+
+.row-detail {
+  white-space: pre-line;
+}

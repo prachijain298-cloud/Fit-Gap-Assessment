@@ -1,0 +1,24 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "6f1d2c1e-8a4b-4c1f-9b3e-2d7a5e4f9a10",
+  "alias": "FitGapAssessmentWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart", "SharePointFullPage"],
+  "supportsThemeVariants": false,
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Advanced" },
+    "title": { "default": "Fit Gap Assessment" },
+    "description": { "default": "Process Fit Assessment dashboard backed by SharePoint lists" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "catalogueList": "Fit Gap Process Catalogue",
+      "assessmentsList": "Fit Gap Assessments",
+      "recordsList": "Fit Gap Assessment Records",
+      "height": 900
+    }
+  }]
+}
