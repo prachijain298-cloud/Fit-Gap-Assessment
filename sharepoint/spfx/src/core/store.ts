@@ -19,7 +19,7 @@ function coerce(type: string, v: any): any {
   return v;
 }
 
-const CODE_BY_TEXT: { [text: string]: Rating } = { 'fit': 'F', 'partial fit': 'P', 'not fit': 'N' };
+const CODE_BY_TEXT: { [text: string]: Rating } = { 'fit': 'F', 'partial fit': 'P', 'not fit': 'N', 'not applicable': 'A' };
 const ms = (v: any): number => { const t = v ? Date.parse(v) : NaN; return isNaN(t) ? 0 : t; };
 
 export interface LoadedData {

@@ -46,7 +46,7 @@ export function startMock({ port = 0, pageSize = 500, processIdAsTitle = false, 
       : { Title: n, InternalName: n, TypeAsString: typeOf(n, false) }));
   defineList('Fit Gap Assessments', mk(A), [excelStyleLists ? 'Assessment_x0020_Key' : 'AssessmentKey']);
   defineList('Fit Gap Assessment Records', mk(R), ['Title'],
-    { [excelStyleLists ? 'Rating' : 'Rating']: ['Fit', 'Partial Fit', 'Not Fit'] });
+    { [excelStyleLists ? 'Rating' : 'Rating']: ['Fit', 'Partial Fit', 'Not Fit', 'Not Applicable'] });
 
   const checkTypes = (list, data) => {
     for (const [k, v] of Object.entries(data)) {

@@ -51,22 +51,18 @@
   }
 }
 
-html {
-  zoom: 1.25;
-}
-
 body {
   min-width: 768px;
   background: var(--bg);
   color: var(--ink);
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 button,
 input,
 select {
-  min-height: 36px;
+  min-height: 30px;
 }
 
 button {
@@ -87,15 +83,15 @@ button {
 }
 
 .top-in {
-  max-width: 1440px;
-  height: 56px;
-  gap: 20px;
-  padding: 0 24px;
+  max-width: 1280px;
+  height: 48px;
+  gap: 16px;
+  padding: 0 20px;
 }
 
 .brand {
   color: var(--ink);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 650;
 }
 
@@ -125,7 +121,7 @@ button {
   min-height: 100%;
   padding: 0 4px;
   border-radius: 0;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .tab:hover {
@@ -155,24 +151,24 @@ button {
 }
 
 .wrap {
-  max-width: 1440px;
-  padding: 24px 24px 56px;
+  max-width: 1280px;
+  padding: 18px 20px 48px;
 }
 
 h1 {
-  margin-bottom: 4px;
-  font-size: 26px;
+  margin-bottom: 2px;
+  font-size: 21px;
   font-weight: 650;
 }
 
 h2 {
-  margin-bottom: 12px;
-  font-size: 17px;
+  margin-bottom: 10px;
+  font-size: 15px;
   font-weight: 650;
 }
 
 h3 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 650;
 }
 
@@ -187,7 +183,7 @@ h3 {
 }
 
 .pad {
-  padding: 20px;
+  padding: 16px;
 }
 
 .intro {
@@ -200,8 +196,13 @@ h3 {
 }
 
 .home-grid {
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 24px;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 20px;
+}
+
+/* Start assessment (and templates) on the left */
+.home-grid > .stack:last-child {
+  order: -1;
 }
 
 .stack {
@@ -216,8 +217,8 @@ h3 {
 }
 
 .btn {
-  min-height: 36px;
-  padding: 7px 14px;
+  min-height: 30px;
+  padding: 5px 12px;
   font-weight: 600;
 }
 
@@ -242,9 +243,9 @@ h3 {
 
 .input,
 .select {
-  min-height: 40px;
-  padding: 8px 12px;
-  font-size: 14px;
+  min-height: 34px;
+  padding: 6px 10px;
+  font-size: 13px;
 }
 
 .input:hover,
@@ -260,9 +261,9 @@ h3 {
 }
 
 .field {
-  gap: 6px;
+  gap: 4px;
   color: var(--ink-2);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -281,24 +282,24 @@ h3 {
 }
 
 table {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 th {
   position: sticky;
   top: 0;
   z-index: 2;
-  padding: 11px 16px;
+  padding: 8px 14px;
   border-bottom-color: #c8d2d7;
   background: #f2f5f6;
   color: var(--ink-2);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 650;
 }
 
 td {
-  height: 52px;
-  padding: 10px 16px;
+  height: 44px;
+  padding: 8px 14px;
   border-bottom-color: var(--line-2);
 }
 
@@ -320,14 +321,14 @@ tbody tr:hover {
 }
 
 .a-head {
-  gap: 20px;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
+  gap: 16px;
+  margin-bottom: 10px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
 }
 
 .a-title input {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 650;
 }
 
@@ -347,8 +348,8 @@ tbody tr:hover {
 }
 
 .stat {
-  min-width: 96px;
-  padding: 9px 14px;
+  min-width: 72px;
+  padding: 5px 10px;
   border-right: 1px solid var(--line);
 }
 
@@ -357,17 +358,17 @@ tbody tr:hover {
 }
 
 .stat b {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .stat span {
   color: var(--ink-2);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .progress-row {
-  gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
+  font-size: 12px;
 }
 
 .sbar {
@@ -380,21 +381,21 @@ tbody tr:hover {
 }
 
 .a-grid {
-  grid-template-columns: 252px minmax(0, 1fr);
-  gap: 20px;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 16px;
 }
 
 .tree {
-  top: 72px;
-  max-height: calc(100vh / 1.25 - 96px);
-  padding: 8px;
+  top: 60px;
+  max-height: calc(100vh - 88px);
+  padding: 6px;
   border-radius: 8px;
 }
 
 .tree-btn {
-  min-height: 36px;
+  min-height: 28px;
   border-radius: 4px;
-  padding: 7px 10px;
+  padding: 4px 8px;
 }
 
 .tree-btn:hover {
@@ -412,10 +413,10 @@ tbody tr:hover {
 
 .toolbar {
   position: sticky;
-  top: 56px;
+  top: 48px;
   z-index: 10;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 8px 12px;
   border-bottom-color: var(--line);
   border-radius: 8px 8px 0 0;
   background: var(--surface);
@@ -426,8 +427,8 @@ tbody tr:hover {
 }
 
 .search .input {
-  min-height: 38px;
-  padding-left: 36px;
+  min-height: 32px;
+  padding-left: 32px;
 }
 
 .seg {
@@ -436,10 +437,10 @@ tbody tr:hover {
 }
 
 .seg button {
-  min-height: 36px;
-  padding: 7px 12px;
+  min-height: 30px;
+  padding: 4px 10px;
   border-right-color: #bdc9ce;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -455,7 +456,8 @@ tbody tr:hover {
 }
 
 .filter-note {
-  padding: 10px 16px;
+  padding: 6px 12px;
+  font-size: 12px;
   background: #f7f9fa;
   color: var(--ink-2);
 }
@@ -470,9 +472,9 @@ tbody tr:hover {
 }
 
 .row {
-  min-height: 64px;
-  gap: 20px;
-  padding: 11px 16px;
+  min-height: 48px;
+  gap: 16px;
+  padding: 7px 12px;
 }
 
 .row:hover {
@@ -482,24 +484,24 @@ tbody tr:hover {
 .row-title {
   gap: 8px;
   color: var(--ink);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 }
 
 .pid {
   color: var(--ink-3);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .row-detail {
-  margin-top: 3px;
+  margin-top: 2px;
   color: var(--ink-2);
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .ref {
   color: var(--ink-3);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .rate {
@@ -507,14 +509,14 @@ tbody tr:hover {
 }
 
 .rate button {
-  min-width: 62px;
-  min-height: 36px;
-  padding: 7px 11px;
+  min-width: 52px;
+  min-height: 28px;
+  padding: 4px 9px;
   border-color: #bdc9ce;
   border-radius: 5px;
   background: var(--surface);
   color: var(--ink-2);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 650;
 }
 
@@ -537,6 +539,13 @@ tbody tr:hover {
   box-shadow: inset 0 0 0 1px #c99435;
 }
 
+.rate button[data-r="A"][aria-pressed="true"] {
+  border-color: #8a9aa3;
+  background: #e9eef0;
+  color: var(--ink-2);
+  box-shadow: inset 0 0 0 1px #8a9aa3;
+}
+
 .rate button[data-r="N"][aria-pressed="true"] {
   border-color: #d17b76;
   background: var(--nofit-bg);
@@ -549,7 +558,7 @@ tbody tr:hover {
 }
 
 .pager {
-  padding: 12px 16px;
+  padding: 8px 12px;
   background: #fafbfb;
 }
 
@@ -581,7 +590,7 @@ tbody tr:hover {
 
 .score-big {
   color: var(--ink);
-  font-size: 56px;
+  font-size: 44px;
   font-weight: 650;
 }
 
@@ -600,17 +609,17 @@ tbody tr:hover {
 }
 
 .panel-head {
-  min-height: 56px;
-  padding: 16px 20px 12px;
+  min-height: 44px;
+  padding: 12px 16px 10px;
   border-bottom: 1px solid var(--line-2);
 }
 
 .panel-head h2 {
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .trow {
-  padding: 12px 20px;
+  padding: 9px 16px;
 }
 
 .trow.head {
@@ -929,17 +938,17 @@ dialog::backdrop {
 
 .wk-opts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
 }
 
 .wk-opt {
-  min-height: 48px;
+  min-height: 40px;
   border: 1px solid #bdc9ce;
   border-radius: 6px;
   background: var(--surface);
   color: var(--ink);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 650;
   cursor: pointer;
 }
@@ -1048,4 +1057,79 @@ input[type="checkbox"] {
 
 .row-detail {
   white-space: pre-line;
+}
+
+.wk-opt[data-r="A"][aria-pressed="true"] {
+  background: var(--ink-2);
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink-2);
+}
+
+.tag.A {
+  background: var(--line-2);
+  color: var(--ink-2);
+}
+
+/* Empty header status stays hidden unless saving fails */
+.save-state:empty {
+  display: none;
+}
+
+/* Collapsible groups: L2 > L3 > processes */
+.acc {
+  border-bottom: 1px solid var(--line-2);
+}
+
+.acc-l2,
+.acc-l3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 34px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.acc-l2 {
+  padding: 6px 12px;
+  background: #f2f5f6;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.acc-l3 {
+  padding: 5px 12px 5px 28px;
+  background: #fafbfb;
+  border-top: 1px solid var(--line-2);
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--ink-2);
+}
+
+.acc-l2:hover,
+.acc-l3:hover {
+  background: var(--accent-soft);
+}
+
+.acc-t {
+  flex: 1;
+  min-width: 0;
+}
+
+.acc-c {
+  color: var(--ink-3);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.acc .caret {
+  flex: none;
+  transition: transform 120ms ease;
+}
+
+.acc button[aria-expanded="true"] > .caret {
+  transform: rotate(90deg);
 }

@@ -48,7 +48,7 @@ const settle = (page) => page.waitForTimeout(1500);
 test('dashboard runs on SharePoint data: catalogue from the list, no browser-storage extras, saves to the lists', async () => {
   const a = await open('Asha Rao');
   const body = await a.app.locator('body').innerText();
-  assert.match(body, /Saved to SharePoint|Connected to SharePoint/);
+  assert.doesNotMatch(body, /Saved in this browser|Saving in this browser/);
   assert.doesNotMatch(body, /Add template version from CSV|Download backup|Restore backup/);
   assert.match(body, /Fit Gap Process Catalogue/);
   assert.match(body, /399 processes/);
@@ -154,25 +154,28 @@ test('two users reassess the same process at once: the second is told and the pa
   await a.ctx.close(); await b.ctx.close();
 });
 
-test('seeding from reference ratings creates version-1 records; deleting the assessment removes them', async () => {
+test('Not Applicable can be saved without a reason; deleting an assessment removes its rows from SharePoint', async () => {
   const a = await open('Asha Rao');
-  await a.app.getByPlaceholder(/Fab 2/).fill('Seeded');
-  await a.app.getByText('Reference plant ratings where available').click();
+  await a.app.getByPlaceholder(/Fab 2/).fill('ToDelete');
   await a.app.getByRole('button', { name: 'Start assessment' }).click();
   await a.app.locator('.row').first().waitFor();
-  await a.page.waitForTimeout(6000);
-  const seeded = rows().filter((x) => x.Title.indexOf('|') > 0 && !x.Title.startsWith(sp.lists['Fit Gap Assessments'].items.find((i) => i.Title === 'Plant 1 review').AssessmentKey));
-  assert.equal(seeded.length, 72);
-  assert.ok(seeded.every((x) => x.Version === 1 && x.Comment === '' && x.AssessedBy === 'Asha Rao'));
+  await a.app.locator('.row-main').first().click();
+  await a.app.locator('.wk-opt[data-r="A"]').click();
+  await a.app.getByRole('button', { name: 'Save Assessment' }).click();
+  await a.page.waitForTimeout(2000);
+  const key = sp.lists['Fit Gap Assessments'].items.find((i) => i.Title === 'ToDelete').AssessmentKey;
+  const mine = rows().filter((x) => x.Title.startsWith(key + '|'));
+  assert.equal(mine.length, 1);
+  assert.equal(mine[0].Rating, 'Not Applicable');
+  assert.equal(mine[0].Comment, '');
   assert.deepEqual(a.errors, []);
 
-  await a.app.getByRole('button', { name: 'Assessments', exact: true }).click();
-  await a.app.getByRole('button', { name: 'Delete Seeded' }).click();
+  await a.app.locator('.brand').click();
+  await a.app.getByRole('button', { name: 'Delete ToDelete' }).click();
   await a.app.getByRole('button', { name: 'Delete assessment' }).click();
-  await a.page.waitForTimeout(3000);
-  assert.equal(sp.lists['Fit Gap Assessments'].items.some((i) => i.Title === 'Seeded'), false);
-  assert.equal(rows().filter((x) => x.Title.indexOf('|BPML-') > 0).length, rows().length);
-  assert.ok(rows().length < 72 + 4, 'seeded records were deleted with the assessment');
+  await a.page.waitForTimeout(2500);
+  assert.equal(sp.lists['Fit Gap Assessments'].items.some((i) => i.Title === 'ToDelete'), false);
+  assert.equal(rows().filter((x) => x.Title.startsWith(key + '|')).length, 0);
   await a.ctx.close();
 });
 

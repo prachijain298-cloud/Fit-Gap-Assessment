@@ -20,7 +20,7 @@ Read only. Needs: Process ID (or Title), L1 Process, L2 Process, L3 Process, and
 | Title | Single line (built in) | `AssessmentKey\|ProcessID\|vN` – **Enforce unique values = Yes** (this is what stops two people saving the same version) |
 | AssessmentKey | Single line of text | Indexed |
 | ProcessID | Single line of text | Indexed. Matches Process ID in the catalogue (BPML-0001 …) |
-| Rating | Choice: Fit, Partial Fit, Not Fit | (a plain text column also works) |
+| Rating | Choice: Fit, Partial Fit, Not Fit, Not Applicable | (a plain text column also works) |
 | Comment | Multiple lines of text – **plain text** | |
 | Version | Number (0 decimals) | (a plain text column also works) |
 | AssessedBy | Single line of text | Display name from the Microsoft login |

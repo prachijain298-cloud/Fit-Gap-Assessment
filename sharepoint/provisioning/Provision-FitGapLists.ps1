@@ -34,7 +34,7 @@ if (-not (Get-PnPList -Identity $RecordsList -ErrorAction SilentlyContinue)) {
 Set-PnPField -List $RecordsList -Identity "Title" -Values @{ Indexed = $true; EnforceUniqueValues = $true; Required = $true }
 Add-PnPField -List $RecordsList -DisplayName "AssessmentKey" -InternalName "AssessmentKey" -Type Text -AddToDefaultView -ErrorAction SilentlyContinue | Out-Null
 Add-PnPField -List $RecordsList -DisplayName "ProcessID"     -InternalName "ProcessID"     -Type Text -AddToDefaultView -ErrorAction SilentlyContinue | Out-Null
-Add-PnPField -List $RecordsList -DisplayName "Rating"        -InternalName "Rating"        -Type Choice -Choices "Fit","Partial Fit","Not Fit" -AddToDefaultView -ErrorAction SilentlyContinue | Out-Null
+Add-PnPField -List $RecordsList -DisplayName "Rating"        -InternalName "Rating"        -Type Choice -Choices "Fit","Partial Fit","Not Fit","Not Applicable" -AddToDefaultView -ErrorAction SilentlyContinue | Out-Null
 Add-PnPField -List $RecordsList -DisplayName "Comment"       -InternalName "Comment"       -Type Note -AddToDefaultView -ErrorAction SilentlyContinue | Out-Null
 Add-PnPField -List $RecordsList -DisplayName "Version"       -InternalName "Version"       -Type Number -AddToDefaultView -ErrorAction SilentlyContinue | Out-Null
 Add-PnPField -List $RecordsList -DisplayName "AssessedBy"      -InternalName "AssessedBy"      -Type Text -AddToDefaultView -ErrorAction SilentlyContinue | Out-Null

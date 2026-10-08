@@ -1,7 +1,7 @@
 /** Rating codes used inside the dashboard app. */
-export type Rating = 'F' | 'P' | 'N';
+export type Rating = 'F' | 'P' | 'N' | 'A';
 
-export const RATING_TEXT: { [code: string]: string } = { F: 'Fit', P: 'Partial Fit', N: 'Not Fit' };
+export const RATING_TEXT: { [code: string]: string } = { F: 'Fit', P: 'Partial Fit', N: 'Not Fit', A: 'Not Applicable' };
 
 /** One saved assessment version for one process. Records are never overwritten, except for an in-place "Edit". */
 export interface HistRecord {
