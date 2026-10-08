@@ -18,7 +18,9 @@ export const TRACK_BY_L1: { [normalisedL1: string]: string } = {
   'fico interfaces': 'RTR',
   'treasury & cash management': 'RTR',
   'product costing': 'RTR',
-  'logistics execution': 'LE'
+  'logistics execution': 'LE',
+  'quality management (qm)': 'QM',
+  'quality management': 'QM'
 };
 
 /** Display names of the catalogue columns the dashboard reads. */

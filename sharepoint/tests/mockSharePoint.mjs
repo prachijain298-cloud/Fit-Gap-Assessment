@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url));
 const encode = (name) => name.replace(/ /g, '_x0020_').replace(/\//g, '_x002f_');
 
-export function startMock({ port = 0, pageSize = 500, processIdAsTitle = false, excelStyleLists = false, staticFiles = {} } = {}) {
+export function startMock({ port = 0, pageSize = 500, processIdAsTitle = false, excelStyleLists = false, extraCatalogueRows = [], deactivate = [], staticFiles = {} } = {}) {
   const catalogue = JSON.parse(readFileSync(resolve(here, 'fixtures/catalogue.json'), 'utf8'));
   const lists = {};
   let nextId = 1;
@@ -24,7 +24,8 @@ export function startMock({ port = 0, pageSize = 500, processIdAsTitle = false, 
   }));
   if (!processIdAsTitle) catFields.push({ Title: 'Title', InternalName: 'Title' });
   defineList('Fit Gap Process Catalogue', catFields);
-  catalogue.rows.forEach((row, i) => {
+  catalogue.rows.concat(extraCatalogueRows).forEach((row0, i) => {
+    const row = deactivate.includes(row0['Process ID']) ? { ...row0, Active: 'No' } : row0;
     const item = { Id: i + 1 };
     for (const f of catFields) if (f.Title in row) item[f.InternalName] = row[f.Title];
     lists['Fit Gap Process Catalogue'].items.push(item);

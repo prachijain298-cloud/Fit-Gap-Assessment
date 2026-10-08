@@ -53,6 +53,7 @@ test('tracks and reference ratings', () => {
   assert.equal(rowToProcess({ 'Process ID': 'X', 'L1 Process': 'Order to Cash', 'L5 Process': 'a_x000D_\nb' })!.l5, 'a\nb');
   assert.equal(trackFor('  Record-to-Report '), 'RTR');
   assert.equal(trackFor('Asset Accounting'), 'RTR');
+  assert.equal(trackFor('Quality Management (QM)'), 'QM');
   assert.equal(trackFor('Something new'), 'GEN');
   assert.equal(ratingFromReference('FIT'), 'F');
   assert.equal(ratingFromReference('Partial FIT'), 'P');
@@ -209,6 +210,24 @@ test('store: a list that is missing a column explains which one', async () => {
   try {
     sp.lists['Fit Gap Assessment Records'].fields = sp.lists['Fit Gap Assessment Records'].fields.filter((f: any) => f.InternalName !== 'ProcessID');
     await assert.rejects(new SpStore(fetchHttp, cfg(sp.url)).load(), /missing the column\(s\): ProcessID/);
+  } finally { await sp.close(); }
+});
+
+test('store: Quality Management rows added to the catalogue appear as a QM track; inactive rows are hidden', async () => {
+  const qmRows = JSON.parse(readFileSync(new URL('./fixtures/qm-rows.json', import.meta.url), 'utf8'));
+  const inactive = ['BPML-0181', 'BPML-0182', 'BPML-0183', 'BPML-0184', 'BPML-0185', 'BPML-0186', 'BPML-0187', 'BPML-0188', 'BPML-0189', 'BPML-0190', 'BPML-0191', 'BPML-0192'];
+  const sp = await startMock({ extraCatalogueRows: qmRows, deactivate: inactive });
+  try {
+    const data = await new SpStore(fetchHttp, cfg(sp.url)).load();
+    const procs = data.templates['fitgap-catalogue'].processes;
+    assert.equal(procs.length, 399 + 15 - 12);
+    const qm = procs.filter((p) => p.t === 'QM');
+    assert.equal(qm.length, 15);
+    assert.equal(qm[0].id, 'BPML-0400');
+    assert.equal(qm[0].l1, 'Quality Management (QM)');
+    assert.equal(qm[0].l4, 'Maintain Master Inspection Characteristics');
+    assert.equal(procs.some((p) => p.id === 'BPML-0181'), false);
+    assert.equal(procs.filter((p) => p.t === 'PTM').length, 60);
   } finally { await sp.close(); }
 });
 

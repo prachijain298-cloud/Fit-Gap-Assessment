@@ -68,5 +68,7 @@ node --test tests/e2e.test.mjs      # real dashboard + web-part host code in Chr
 * The list-creation script is untested.
 * Data is loaded when the page opens. Another person's new work appears after a refresh (no live sync).
 * Lists are only fast beyond 5,000 rows if `AssessmentKey` / `ProcessID` are indexed (the script does this).
+* **Catalogue changes:** QM (Quality Management) rows are recognised by the L1 value "Quality Management (QM)". To add QM or hide the 12 old
+  Manufacturing rows, use `QM_rows_for_SharePoint_catalogue.xlsx` (paste into the list in grid view; set Active = No on the old rows).
 * The catalogue text contained two literal `_x000D_` markers (BPML-0074); the web part strips them when reading.
 * "Reference plant" seeding writes one version-1 row per process, attributed to whoever started the assessment.
