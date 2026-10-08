@@ -221,12 +221,13 @@ export class SpStore {
       if (!sameRating || (server.Comment || '') !== known.comment || ms(server.EditedAt) !== (known.editedAt || 0)) {
         throw new SpError('Someone else changed this assessment while you were editing it.', 409, true);
       }
-      await this.rest.update(c.recordsList, u.itemId, this.toFields(c.recordsList, {
-        Rating: RATING_TEXT[u.rec.rating],
-        Comment: u.rec.comment || '',
-        EditedAt: new Date(u.rec.editedAt || Date.now()).toISOString(),
-        EditedBy: u.rec.editedBy || c.userName
-      }));
+      // A comment added to a record that had none is not a correction, so it is not marked as edited.
+      const changes: { [k: string]: any } = { Rating: RATING_TEXT[u.rec.rating], Comment: u.rec.comment || '' };
+      if (u.rec.editedAt) {
+        changes.EditedAt = new Date(u.rec.editedAt).toISOString();
+        changes.EditedBy = u.rec.editedBy || c.userName;
+      }
+      await this.rest.update(c.recordsList, u.itemId, this.toFields(c.recordsList, changes));
       this.snap.records[u.key] = { itemId: u.itemId, rating: u.rec.rating, comment: u.rec.comment || '', editedAt: u.rec.editedAt || 0 };
     }
 

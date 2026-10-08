@@ -66,6 +66,7 @@ node --test tests/e2e.test.mjs      # real dashboard + web-part host code in Chr
   API and were tested against a mock that imitates it, and the package builds with the real SPFx toolchain. Expect to fix small
   things on first deployment (list names, permissions, a column type).
 * The list-creation script is untested.
+* The newer demo features (assessment owner, Completed/In-progress status, per-process transcript) are stored in the browser build only; the SharePoint lists do not have columns for them yet.
 * Data is loaded when the page opens. Another person's new work appears after a refresh (no live sync).
 * Lists are only fast beyond 5,000 rows if `AssessmentKey` / `ProcessID` are indexed (the script does this).
 * **Catalogue changes:** QM (Quality Management) rows are recognised by the L1 value "Quality Management (QM)". To add QM or hide the 12 old

@@ -65,8 +65,7 @@ test('dashboard runs on SharePoint data: catalogue from the list, no browser-sto
   await a.app.locator('.wk-opt[data-r="P"]').click();
   assert.equal(await a.app.getByRole('button', { name: 'Save Assessment' }).isDisabled(), true, 'comment required for Partial Fit');
   await a.app.locator('.wk-reason').fill('Standard covers most; a custom approval step is needed.');
-  assert.equal(await a.app.getByPlaceholder('Your name').inputValue(), 'Asha Rao');
-  assert.equal(await a.app.getByPlaceholder('Your name').isEditable(), false, 'name comes from the Microsoft login');
+  assert.equal(await a.app.getByPlaceholder('Your name').count(), 0, 'no name box: the assessor is the signed-in user');
   await a.app.getByRole('button', { name: 'Save Assessment' }).click();
   await settle(a.page);
 
@@ -152,6 +151,34 @@ test('two users reassess the same process at once: the second is told and the pa
   assert.equal(v3.length, 1);
   assert.equal(v3[0].Comment, 'A: dropped from scope.');
   await a.ctx.close(); await b.ctx.close();
+});
+
+test('quick Fit saves instantly under the signed-in name; Partial Fit asks for a comment inline', async () => {
+  const a = await open('Asha Rao');
+  await a.app.getByPlaceholder(/Fab 2/).fill('Quick');
+  await a.app.getByRole('button', { name: 'Start assessment' }).click();
+  await a.app.locator('.row').first().waitFor();
+  const key = () => sp.lists['Fit Gap Assessments'].items.find((i) => i.Title === 'Quick').AssessmentKey;
+  await a.app.locator('.row').first().locator('.rate button', { hasText: /^Fit$/ }).click();
+  await a.app.locator('.row').nth(1).locator('.rate button', { hasText: /^Partial Fit$/ }).click();
+  assert.equal(await a.app.locator('.ic').getByRole('button', { name: 'Save', exact: true }).isDisabled(), true);
+  await a.app.locator('.ic-text').first().fill('Needs a custom approval step.');
+  await a.app.locator('.ic').getByRole('button', { name: 'Save', exact: true }).click();
+  await a.page.waitForTimeout(2200);
+  const mine = rows().filter((x) => x.Title.startsWith(key() + '|')).sort((x, y) => (x.ProcessID < y.ProcessID ? -1 : 1));
+  assert.equal(mine.length, 2);
+  assert.deepEqual(mine.map((x) => [x.Rating, x.Comment, x.AssessedBy]), [['Fit', '', 'Asha Rao'], ['Partial Fit', 'Needs a custom approval step.', 'Asha Rao']]);
+  // adding a comment to the Fit afterwards completes the same record (no new version)
+  await a.app.locator('.row').first().getByText('Add comment').click();
+  await a.app.locator('.ic-text').first().fill('Standard works.');
+  await a.app.locator('.ic').getByRole('button', { name: 'Save', exact: true }).click();
+  await a.page.waitForTimeout(2200);
+  const fit = rows().find((x) => x.Title === key() + '|' + mine[0].ProcessID + '|v1');
+  assert.equal(fit.Comment, 'Standard works.');
+  assert.ok(!fit.EditedAt, 'completing a record with a comment is not an edit');
+  assert.equal(rows().filter((x) => x.Title.startsWith(key() + '|')).length, 2);
+  assert.deepEqual(a.errors, []);
+  await a.ctx.close();
 });
 
 test('Not Applicable can be saved without a reason; deleting an assessment removes its rows from SharePoint', async () => {
