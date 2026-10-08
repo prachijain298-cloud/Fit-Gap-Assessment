@@ -9,8 +9,8 @@
   --ink-3: #687b84;
   --line: #d5dde1;
   --line-2: #e7ecef;
-  --accent: #09244f;
-  --accent-soft: #e7ecf4;
+  --accent: #4f8309;
+  --accent-soft: #eef5e3;
   --accent-ink: #ffffff;
   --fit: #4f8309;
   --fit-bg: #eef5e3;
@@ -35,8 +35,8 @@
     --ink-3: #687b84;
     --line: #d5dde1;
     --line-2: #e7ecef;
-    --accent: #09244f;
-    --accent-soft: #e7ecf4;
+    --accent: #4f8309;
+    --accent-soft: #eef5e3;
     --accent-ink: #ffffff;
     --fit: #4f8309;
     --fit-bg: #eef5e3;
@@ -232,7 +232,7 @@ h3 {
 }
 
 .btn-primary:hover {
-  background: #061a3a;
+  background: #3d6607;
   filter: none;
 }
 
@@ -256,7 +256,7 @@ h3 {
 .input:focus,
 .select:focus {
   border-color: var(--accent);
-  outline: 2px solid rgb(9 36 79 / 18%);
+  outline: 2px solid rgb(79 131 9 / 22%);
   outline-offset: 0;
 }
 
@@ -404,7 +404,7 @@ tbody tr:hover {
 
 .tree-btn[aria-pressed="true"] {
   background: var(--accent-soft);
-  color: #09244f;
+  color: #3d6607;
 }
 
 #list-panel {
@@ -451,7 +451,7 @@ tbody tr:hover {
 
 .seg button[aria-pressed="true"] {
   background: var(--accent-soft);
-  color: #09244f;
+  color: #3d6607;
   box-shadow: inset 0 -2px var(--accent);
 }
 
@@ -929,7 +929,7 @@ dialog::backdrop {
   border: 1px solid var(--accent);
   border-radius: 8px;
   background: var(--surface);
-  box-shadow: 0 1px 4px rgb(9 36 79 / 14%);
+  box-shadow: 0 1px 4px rgb(79 131 9 / 16%);
 }
 
 .wk-cur h4 {
@@ -1198,7 +1198,7 @@ input[type="checkbox"] {
 
 /* ---------- Pentair branding ---------- */
 .top {
-  border-top: 3px solid var(--accent);
+  border-top: 3px solid #09244f;
 }
 
 .brand-co {
@@ -1312,7 +1312,7 @@ input[type="checkbox"] {
 }
 
 .brd-btn {
-  color: #09244f;
+  color: #3d6607;
 }
 
 /* ---------- Section headers with "mark all" ---------- */
@@ -1384,7 +1384,7 @@ input[type="checkbox"] {
   padding: 2px 8px;
   border-radius: 10px;
   background: var(--accent-soft);
-  color: #09244f;
+  color: #3d6607;
   font-size: 11px;
   font-weight: 650;
   white-space: nowrap;
@@ -1534,7 +1534,7 @@ dialog.brd {
   font-size: 11.5px;
 }
 
-/* Pentair palette: navy #09244f, green #4f8309 (from the logo) */
+/* Pentair palette: navy #3d6607, green #4f8309 (from the logo) */
 .btn-primary {
   background: var(--accent);
   border-color: var(--accent);
@@ -1547,5 +1547,5 @@ dialog.brd {
 }
 
 .score-big {
-  color: var(--accent);
+  color: #09244f;
 }
