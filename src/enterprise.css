@@ -9,11 +9,11 @@
   --ink-3: #687b84;
   --line: #d5dde1;
   --line-2: #e7ecef;
-  --accent: #0a5ea8;
-  --accent-soft: #e6f0fa;
+  --accent: #09244f;
+  --accent-soft: #e7ecf4;
   --accent-ink: #ffffff;
-  --fit: #0a5ea8;
-  --fit-bg: #eaf3fc;
+  --fit: #4f8309;
+  --fit-bg: #eef5e3;
   --partial: #9b6100;
   --partial-bg: #fff2d6;
   --nofit: #b23b35;
@@ -35,11 +35,11 @@
     --ink-3: #687b84;
     --line: #d5dde1;
     --line-2: #e7ecef;
-    --accent: #0a5ea8;
-    --accent-soft: #e6f0fa;
+    --accent: #09244f;
+    --accent-soft: #e7ecf4;
     --accent-ink: #ffffff;
-    --fit: #0a5ea8;
-    --fit-bg: #eaf3fc;
+    --fit: #4f8309;
+    --fit-bg: #eef5e3;
     --partial: #9b6100;
     --partial-bg: #fff2d6;
     --nofit: #b23b35;
@@ -232,7 +232,7 @@ h3 {
 }
 
 .btn-primary:hover {
-  background: #084c88;
+  background: #061a3a;
   filter: none;
 }
 
@@ -256,7 +256,7 @@ h3 {
 .input:focus,
 .select:focus {
   border-color: var(--accent);
-  outline: 2px solid rgb(10 110 209 / 18%);
+  outline: 2px solid rgb(9 36 79 / 18%);
   outline-offset: 0;
 }
 
@@ -404,7 +404,7 @@ tbody tr:hover {
 
 .tree-btn[aria-pressed="true"] {
   background: var(--accent-soft);
-  color: #084c88;
+  color: #09244f;
 }
 
 #list-panel {
@@ -451,7 +451,7 @@ tbody tr:hover {
 
 .seg button[aria-pressed="true"] {
   background: var(--accent-soft);
-  color: #084c88;
+  color: #09244f;
   box-shadow: inset 0 -2px var(--accent);
 }
 
@@ -526,10 +526,10 @@ tbody tr:hover {
 }
 
 .rate button[data-r="F"][aria-pressed="true"] {
-  border-color: #5b9bd5;
+  border-color: #7fae45;
   background: var(--fit-bg);
-  color: #084c88;
-  box-shadow: inset 0 0 0 1px #5b9bd5;
+  color: #3d6607;
+  box-shadow: inset 0 0 0 1px #7fae45;
 }
 
 .rate button[data-r="P"][aria-pressed="true"] {
@@ -929,7 +929,7 @@ dialog::backdrop {
   border: 1px solid var(--accent);
   border-radius: 8px;
   background: var(--surface);
-  box-shadow: 0 1px 4px rgb(10 110 209 / 14%);
+  box-shadow: 0 1px 4px rgb(9 36 79 / 14%);
 }
 
 .wk-cur h4 {
@@ -965,9 +965,9 @@ dialog::backdrop {
 }
 
 .wk-opt[data-r="F"][aria-pressed="true"] {
-  background: var(--accent);
+  background: var(--fit);
   color: #fff;
-  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--fit);
 }
 
 .wk-opt[data-r="P"][aria-pressed="true"] {
@@ -1209,7 +1209,7 @@ input[type="checkbox"] {
 }
 
 .brand-logo {
-  height: 22px;
+  height: 26px;
   width: auto;
   display: block;
 }
@@ -1312,7 +1312,7 @@ input[type="checkbox"] {
 }
 
 .brd-btn {
-  color: #084c88;
+  color: #09244f;
 }
 
 /* ---------- Section headers with "mark all" ---------- */
@@ -1384,7 +1384,7 @@ input[type="checkbox"] {
   padding: 2px 8px;
   border-radius: 10px;
   background: var(--accent-soft);
-  color: #084c88;
+  color: #09244f;
   font-size: 11px;
   font-weight: 650;
   white-space: nowrap;
@@ -1532,4 +1532,20 @@ dialog.brd {
 .table-wrap .actions .btn {
   padding: 2px 6px;
   font-size: 11.5px;
+}
+
+/* Pentair palette: navy #09244f, green #4f8309 (from the logo) */
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.stat-pill.done,
+.chip.done {
+  background: #eef5e3;
+  color: #3d6607;
+}
+
+.score-big {
+  color: var(--accent);
 }
