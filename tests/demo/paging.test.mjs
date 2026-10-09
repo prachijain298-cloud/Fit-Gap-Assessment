@@ -1,0 +1,10 @@
+import { chromium } from '/opt/node-tools/node_modules/playwright/index.mjs';
+const b = await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
+const p=await (await b.newContext({viewport:{width:1440,height:900}})).newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>['error','warning'].includes(m.type())&&errs.push(m.text()));
+const ok=(n,v,x='')=>console.log((v?'PASS ':'FAIL ')+n+(x?' | '+x:''));
+await p.goto('file://'+process.argv[2]); await p.waitForTimeout(800);
+await p.getByPlaceholder(/Fab 2/).fill('t'); await p.getByRole('button',{name:'Start assessment'}).click(); await p.waitForTimeout(600); await p.locator('.tree-btn',{hasText:'PTP'}).first().click(); await p.waitForTimeout(300);
+ok('pager shows 1–25 of 73 with Prev / 1 2 3 / Next', /1–25 of 73/.test(await p.locator('.pager').innerText()) && (await p.locator('.pager-btns button').allInnerTexts()).join(',')==='Prev,1,2,3,Next', (await p.locator('.pager').innerText()).replace(/\s+/g,' '));
+ok('sections still collapsed, rows hidden', (await p.locator('.row').count())===0 && (await p.locator('.acc-l3[aria-expanded="true"]').count())===0);
+const n1=await p.locator('.acc-h3').count(); await p.locator('.pager-btns button',{hasText:'2'}).click(); await p.waitForTimeout(300); ok('page 2 shows the next sections', /26–50 of 73/.test(await p.locator('.pager').innerText()) && (await p.locator('.acc-h3').count())>0, n1+' sections on page 1');
+await p.screenshot({path:process.argv[3]}); ok('no errors',errs.length===0,errs.join('|')); await b.close();
