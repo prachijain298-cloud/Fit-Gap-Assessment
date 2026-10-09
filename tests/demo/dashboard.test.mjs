@@ -19,6 +19,7 @@ await p.setViewportSize({width:1440,height:900});
 await p.screenshot({path:OUT+'/home.png'});
 // ---- new assessment
 await p.getByPlaceholder(/Fab 2/).fill('Change test'); await p.getByRole('button',{name:'Start assessment'}).click(); await p.waitForTimeout(600);
+await p.locator('.acc-l3').first().click(); await p.waitForTimeout(250);
 const row=i=>p.locator('.row').nth(i), rb=(i,n)=>row(i).locator('.rate button',{hasText:new RegExp('^'+n+'$')});
 await rb(0,'Fit').click(); await p.waitForTimeout(250);
 ok('no "Reference plant" lines on rows', !/Reference plant/.test(await body()));
@@ -44,6 +45,7 @@ await p.locator('.tree-btn',{hasText:'PTP'}).first().click(); await p.waitForTim
 ok('L2 headers have no bulk buttons', (await p.locator('.acc-h2 .acc-b').count())===0);
 const names=await p.locator('.acc-h3').first().locator('.acc-b').allInnerTexts(); ok('L3 header: Mark all Fit / Partial Fit / Not Fit / N/A', JSON.stringify(names)===JSON.stringify(['Mark all Fit','Mark all Partial Fit','Mark all Not Fit','Mark all N/A']), names.join(','));
 await p.screenshot({path:OUT+'/bulk.png'});
+await p.locator('.acc-sub').nth(1).locator('.acc-l3').click(); await p.locator('.acc-sub').nth(2).locator('.acc-l3').click(); await p.waitForTimeout(250);
 const sec=p.locator('.acc-sub').nth(1); const secName=await sec.locator('.acc-h3 .acc-t').innerText(); const nrows=await sec.locator('.row').count();
 await sec.getByRole('button',{name:'Mark all Partial Fit'}).click(); await p.waitForTimeout(300);
 const okBtn=p.locator('dialog[open]').getByRole('button',{name:'Mark all Partial Fit'}); ok('bulk Partial Fit: modal asks for a comment, OK disabled until typed', (await p.locator('dialog[open] textarea').count())===1 && await okBtn.isDisabled());
@@ -62,7 +64,7 @@ ok('chevron button at the right end of each track row', (await p.locator('detail
 const pos=await p.locator('details.tr').first().locator('summary').evaluate(s=>{const g=s.querySelector('.ft-go').getBoundingClientRect(),sc=s.querySelector('b.num').getBoundingClientRect();return g.left>=sc.right-1});
 ok('chevron sits right of Overall Fit Score', pos);
 await p.locator('.s-grid').screenshot({path:OUT+'/tracks.png'});
-await p.locator('details.tr').first().locator('summary .ft-go').click(); await p.waitForTimeout(500); ok('track chevron goes to that track\'s page', (await p.locator('.filter-note').innerText()).startsWith('PTP') && (await p.locator('.row').count())>0);
+await p.locator('details.tr').first().locator('summary .ft-go').click(); await p.waitForTimeout(500); ok('track chevron goes to that track\'s page', (await p.locator('.filter-note').innerText()).startsWith('PTP') && (await p.locator('.acc-l3').count())>0);
 await p.locator('.tab',{hasText:'Assessment Summary'}).click(); await p.waitForTimeout(400); await p.locator('details.tr summary').first().click(); await p.waitForTimeout(250);
 const l2=await p.locator('details.tr').first().locator('.trow.sub').first().locator('.nm button').innerText(); await p.locator('details.tr').first().locator('.trow.sub').first().locator('.ft-go').click(); await p.waitForTimeout(500);
 ok('L2 sub-row chevron goes to that L2 page', (await p.locator('.filter-note').innerText()).includes(l2), l2+' -> '+(await p.locator('.filter-note').innerText()).slice(0,60));
