@@ -43,18 +43,14 @@ await p.screenshot({path:OUT+'/panel.png'});
 // bulk buttons
 await p.locator('.tree-btn',{hasText:'PTP'}).first().click(); await p.waitForTimeout(300);
 ok('L2 headers have no bulk buttons', (await p.locator('.acc-h2 .acc-b').count())===0);
-const names=await p.locator('.acc-h3').first().locator('.acc-b').allInnerTexts(); ok('L3 header: Mark all Fit / Partial Fit / Not Fit / N/A', JSON.stringify(names)===JSON.stringify(['Mark all Fit','Mark all Partial Fit','Mark all Not Fit','Mark all N/A']), names.join(','));
+const names=await p.locator('.acc-h3').first().locator('.acc-b').allInnerTexts(); ok('L3 header: Mark all Fit / N/A only', JSON.stringify(names)===JSON.stringify(['Mark all Fit','Mark all N/A']), names.join(','));
 await p.screenshot({path:OUT+'/bulk.png'});
-await p.locator('.acc-sub').nth(1).locator('.acc-l3').click(); await p.locator('.acc-sub').nth(2).locator('.acc-l3').click(); await p.waitForTimeout(250);
-const sec=p.locator('.acc-sub').nth(1); const secName=await sec.locator('.acc-h3 .acc-t').innerText(); const nrows=await sec.locator('.row').count();
-await sec.getByRole('button',{name:'Mark all Partial Fit'}).click(); await p.waitForTimeout(300);
-const okBtn=p.locator('dialog[open]').getByRole('button',{name:'Mark all Partial Fit'}); ok('bulk Partial Fit: modal asks for a comment, OK disabled until typed', (await p.locator('dialog[open] textarea').count())===1 && await okBtn.isDisabled());
-await p.locator('dialog[open] textarea').fill('Same gap in every plant.'); await okBtn.click(); await p.waitForTimeout(500);
-const after=await p.locator('.acc-sub').nth(1).locator('.row').evaluateAll(r=>r.map(x=>[x.querySelector('.rate button[aria-pressed="true"]')?.innerText, x.querySelector('.row-comment')?.innerText]));
-ok('bulk Partial Fit applies rating + comment to all '+nrows+' in "'+secName+'"', after.length===nrows && after.every(a=>a[0]==='Partial Fit' && a[1]==='Same gap in every plant.'), JSON.stringify(after[0]));
-await p.getByRole('button',{name:'Undo'}).click(); await p.waitForTimeout(400); const undone=await p.locator('.acc-sub').nth(1).locator('.row').evaluateAll(r=>r.filter(x=>x.querySelector('.rate button[aria-pressed="true"]')).length); ok('bulk Undo reverts', undone===0, undone);
-const sec3=p.locator('.acc-sub').nth(2); await sec3.getByRole('button',{name:'Mark all Not Fit'}).click(); await p.waitForTimeout(300); await p.locator('dialog[open] textarea').fill('Not in standard.'); await p.locator('dialog[open]').getByRole('button',{name:'Mark all Not Fit'}).click(); await p.waitForTimeout(400); ok('bulk Not Fit works', (await sec3.locator('.rate button[aria-pressed="true"]').first().innerText())==='Not Fit');
-await sec.getByRole('button',{name:'Mark all Fit'}).click(); await p.waitForTimeout(250); ok('bulk Fit: optional comment box', (await p.locator('dialog[open] textarea').count())===1); await p.locator('dialog[open]').getByRole('button',{name:'Cancel'}).click(); await p.waitForTimeout(200);
+await p.locator('.acc-sub').nth(1).locator('.acc-dd').click(); await p.waitForTimeout(200);
+const sec=p.locator('.acc-sub').nth(1); const nrows=await sec.locator('.row').count();
+await sec.getByRole('button',{name:'Mark all Fit'}).click(); await p.waitForTimeout(300); ok('bulk Fit: confirm only, no comment box', (await p.locator('dialog[open] textarea').count())===0 && (await p.locator('dialog[open]').count())===1);
+await p.locator('dialog[open]').getByRole('button',{name:'Mark all Fit'}).click(); await p.waitForTimeout(400);
+ok('bulk Fit marks all '+nrows, await sec.locator('.row').evaluateAll(r=>r.every(x=>x.querySelector('.rate button[aria-pressed="true"]')?.innerText==='Fit')));
+await p.getByRole('button',{name:'Undo'}).click(); await p.waitForTimeout(400); ok('bulk Undo reverts', (await sec.locator('.row').evaluateAll(r=>r.filter(x=>x.querySelector('.rate button[aria-pressed="true"]')).length))===0);
 // summary
 await p.locator('.tab',{hasText:'Assessment Summary'}).click(); await p.waitForTimeout(500);
 const sc=await p.locator('.score-big').evaluate(e=>getComputedStyle(e).color); ok('summary Overall Fit Score is black', sc==='rgb(0, 0, 0)', sc);

@@ -10,7 +10,7 @@ const l3=await p.locator('.acc-h3 .acc-t').allInnerTexts(); ok('L3 sections list
 ok('process rows hidden until a section is opened', (await p.locator('.row').count())===0);
 ok('L3 headers collapsed (aria-expanded=false)', await p.locator('.acc-l3').evaluateAll(e=>e.every(x=>x.getAttribute('aria-expanded')==='false')));
 ok('L2 groups expanded', await p.locator('.acc-l2').evaluateAll(e=>e.every(x=>x.getAttribute('aria-expanded')==='true')));
-ok('Mark all buttons on each section', (await p.locator('.acc-h3').first().locator('.acc-b').count())===4);
+ok('Mark all buttons on each section', (await p.locator('.acc-h3').first().locator('.acc-b').count())===2);
 await p.screenshot({path:process.argv[3]+'/list.png'});
 await p.locator('.acc-l3').nth(1).click(); await p.waitForTimeout(250); ok('click a section opens its rows', (await p.locator('.row').count())===5, String(await p.locator('.row').count()));
 await p.locator('.acc-l3').nth(1).click(); await p.waitForTimeout(250); ok('click again collapses', (await p.locator('.row').count())===0);

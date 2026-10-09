@@ -1,0 +1,17 @@
+import { chromium } from '/opt/node-tools/node_modules/playwright/index.mjs';
+const b = await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
+const ctx=await b.newContext({viewport:{width:1440,height:900}}); await ctx.route(/^https?:/,r=>r.abort()); const p=await ctx.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>['error','warning'].includes(m.type())&&errs.push(m.text())); p.on('dialog',d=>{errs.push('dialog');d.dismiss()});
+const ok=(n,v,x='')=>console.log((v?'PASS ':'FAIL ')+n+(x?' | '+String(x).slice(0,200):''));
+await p.goto('file://'+process.argv[2]); await p.waitForTimeout(800);
+await p.getByPlaceholder(/Fab 2/).fill('t'); await p.getByRole('button',{name:'Start assessment'}).click(); await p.waitForTimeout(600); await p.locator('.tree-btn',{hasText:'PTP'}).first().click(); await p.waitForTimeout(300);
+const names=await p.locator('.acc-h3').first().locator('.acc-b').allInnerTexts(); ok('sections have only Mark all Fit and Mark all N/A', JSON.stringify(names)===JSON.stringify(['Mark all Fit','Mark all N/A']), names.join(','));
+ok('no Partial Fit / Not Fit bulk buttons anywhere', (await p.getByRole('button',{name:/Mark all (Partial|Not Fit)/}).count())===0);
+const sec=i=>p.locator('.acc-sub').nth(i);
+await sec(1).locator('.acc-dd').click(); await p.waitForTimeout(150); await sec(1).locator('.row').nth(0).locator('.rate button',{hasText:/^Not Fit$/}).click(); await p.locator('.ic-text').first().fill('Old note.'); await p.locator('.ic').getByRole('button',{name:'Save',exact:true}).click(); await p.waitForTimeout(250); await sec(1).locator('.acc-dd').click(); await p.waitForTimeout(150);
+await sec(1).getByRole('button',{name:'Mark all Fit'}).click(); await p.waitForTimeout(250);
+ok('Mark all Fit: confirm only, no comment box', (await p.locator('dialog[open]').count())===1 && (await p.locator('dialog[open] textarea').count())===0, (await p.locator('dialog[open]').innerText()).replace(/\s+/g,' '));
+await p.locator('dialog[open]').getByRole('button',{name:'Mark all Fit'}).click(); await p.waitForTimeout(400);
+ok('all 5 marked at once', (await sec(1).locator('.acc-c').innerText()).trim()==='5/5');
+await p.getByRole('button',{name:'Undo'}).click(); await p.waitForTimeout(300); ok('Undo restores', (await sec(1).locator('.acc-c').innerText()).trim()==='1/5');
+await sec(2).getByRole('button',{name:'Mark all N/A'}).click(); await p.waitForTimeout(250); ok('Mark all N/A: confirm only, no comment box', (await p.locator('dialog[open] textarea').count())===0); await p.locator('dialog[open]').getByRole('button',{name:'Mark all Not Applicable'}).click(); await p.waitForTimeout(400); const c=(await sec(2).locator('.acc-c').innerText()).trim().split('/'); ok('Mark all N/A marks the whole section', c[0]===c[1], c.join('/'));
+ok('no console errors / native dialogs', errs.length===0, errs.join('|')); await b.close();
