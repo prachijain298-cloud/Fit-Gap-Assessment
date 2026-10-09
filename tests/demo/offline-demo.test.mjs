@@ -96,7 +96,7 @@ await p.locator('dialog[open]').getByRole('button',{name:'Cancel'}).click(); awa
 ok('Mark all: Cancel changes nothing', (await p.locator('.progress-row').innerText())===before);
 await p.getByRole('button',{name:'Mark all Fit'}).last().click(); await p.waitForTimeout(300); await p.locator('dialog[open]').getByRole('button',{name:/^Mark all Fit$/}).click(); await p.waitForTimeout(400);
 ok('Mark all: confirm marks processes + undo note', (await p.locator('.progress-row').innerText())!==before && (await p.locator('.bulk-note').count())===1, await p.locator('.bulk-note').innerText());
-await p.getByRole('button',{name:'Mark all N/A'}).first().click(); await p.waitForTimeout(300); await p.locator('dialog[open]').getByRole('button',{name:'Cancel'}).click(); await p.waitForTimeout(200);
+await p.getByRole('button',{name:'Mark all N/A'}).nth(3).click(); await p.waitForTimeout(300); await p.locator('dialog[open]').getByRole('button',{name:'Cancel'}).click(); await p.waitForTimeout(200);
 // ---------- search
 const inp=p.getByPlaceholder(/search/i).first(); await p.locator('.tree-btn',{hasText:'All processes'}).click(); await p.waitForTimeout(200);
 await inp.fill('PTP-018'); await p.waitForTimeout(400); ok('search PTP-018', JSON.stringify(await p.locator('.row .pid').allInnerTexts())==='["PTP-018"]' && (await p.locator('.acc').count())===1, await p.locator('.filter-note').innerText());
