@@ -1549,3 +1549,332 @@ dialog.brd {
 .score-big {
   color: #09244f;
 }
+
+/* =====================================================================
+   Pentair look: livelier navy + green
+   ===================================================================== */
+body {
+  background:
+    radial-gradient(1200px 400px at 100% -10%, rgb(79 131 9 / 9%), transparent 60%),
+    radial-gradient(900px 380px at -10% 0%, rgb(9 36 79 / 8%), transparent 55%),
+    #f3f6f9;
+}
+
+/* header: navy-to-green brand stripe */
+.top {
+  border-top: 0;
+  box-shadow: 0 1px 3px rgb(9 36 79 / 10%);
+  position: relative;
+}
+
+.top::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, #09244f 0%, #09244f 55%, #4f8309 100%);
+}
+
+.tab[aria-current="page"]::after {
+  background: linear-gradient(90deg, #09244f, #4f8309);
+  height: 3px;
+}
+
+/* home hero */
+.intro {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #09244f 0%, #0c3468 55%, #1d5a2a 120%);
+  color: #fff;
+  box-shadow: 0 6px 18px rgb(9 36 79 / 18%);
+}
+
+.intro h1 {
+  color: #fff;
+  font-size: 24px;
+}
+
+.intro p {
+  color: rgb(255 255 255 / 86%);
+  max-width: 62ch;
+}
+
+.intro::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: -10px;
+  bottom: -20px;
+  width: 260px;
+  opacity: 0.9;
+  background:
+    linear-gradient(135deg, transparent 49%, rgb(255 255 255 / 10%) 50%) 0 0 / 52px 52px,
+    linear-gradient(225deg, #4f8309 0 50%, transparent 51%) 150px 20px / 70px 70px no-repeat,
+    linear-gradient(315deg, #6aa81c 0 50%, transparent 51%) 100px 90px / 56px 56px no-repeat,
+    linear-gradient(45deg, rgb(255 255 255 / 85%) 0 50%, transparent 51%) 190px 100px / 44px 44px no-repeat;
+  clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+
+/* cards */
+.panel {
+  border-color: #dbe3ec;
+  box-shadow: 0 1px 2px rgb(9 36 79 / 6%), 0 4px 14px rgb(9 36 79 / 5%);
+}
+
+.home-grid > .stack:last-child > .panel:first-child {
+  border-top: 3px solid var(--accent);
+}
+
+.panel-head h2,
+.panel.pad > h2 {
+  position: relative;
+  padding-left: 10px;
+  color: #09244f;
+}
+
+.panel-head h2::before,
+.panel.pad > h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(#4f8309, #09244f);
+}
+
+.table-wrap th {
+  background: #e8eef6;
+  color: #09244f;
+}
+
+tbody tr:hover {
+  background: #f1f6ea;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #5a9409, #4f8309);
+  box-shadow: 0 1px 2px rgb(79 131 9 / 35%);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(180deg, #4f8309, #3d6607);
+}
+
+.btn:not(.btn-primary):hover {
+  border-color: #09244f;
+  color: #09244f;
+}
+
+/* assessment header becomes a branded banner */
+.a-head {
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #09244f 0%, #0c3468 62%, #1d5a2a 130%);
+  color: #fff;
+  box-shadow: 0 6px 18px rgb(9 36 79 / 18%);
+}
+
+.a-head .a-title input {
+  color: #fff;
+  background: transparent;
+}
+
+.a-head .a-title input:hover,
+.a-head .a-title input:focus {
+  border-color: rgb(255 255 255 / 45%);
+  background: rgb(255 255 255 / 8%);
+}
+
+.a-head .a-meta {
+  color: rgb(255 255 255 / 82%);
+}
+
+.a-head .chip {
+  background: rgb(255 255 255 / 16%);
+  border-color: rgb(255 255 255 / 25%);
+  color: #fff;
+}
+
+.a-head .chip.done {
+  background: #6aa81c;
+  border-color: #6aa81c;
+  color: #fff;
+}
+
+.a-head .a-stats {
+  border: 0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+}
+
+.a-head .btn:not(.btn-primary) {
+  background: rgb(255 255 255 / 12%);
+  border-color: rgb(255 255 255 / 55%);
+  color: #fff;
+}
+
+.a-head .btn:not(.btn-primary):hover {
+  background: #fff;
+  color: #09244f;
+}
+
+.a-head .btn-primary {
+  background: #4f8309;
+  border-color: #fff;
+}
+
+.progress-row {
+  color: #09244f;
+  font-weight: 600;
+}
+
+/* bars */
+.sbar {
+  height: 6px;
+  border-radius: 3px;
+}
+
+.sbar i.f {
+  background: #4f8309;
+}
+
+/* left tree */
+.tree {
+  border-top: 3px solid #09244f;
+}
+
+.tree-btn[aria-pressed="true"] {
+  background: #eef5e3;
+  box-shadow: inset 3px 0 #4f8309;
+  color: #09244f;
+}
+
+.tree-btn[aria-pressed="true"] span:first-child {
+  font-weight: 700;
+}
+
+/* accordions */
+.acc-h2 {
+  background: linear-gradient(90deg, #e8eef6, #f2f5f6);
+  border-left: 4px solid #09244f;
+}
+
+.acc-h2 .acc-l2 {
+  color: #09244f;
+}
+
+.acc-h3 {
+  border-left: 4px solid #4f8309;
+}
+
+.acc-l2:hover,
+.acc-l3:hover {
+  background: rgb(79 131 9 / 10%);
+}
+
+.acc-b {
+  border-color: #c6d3e2;
+  color: #09244f;
+}
+
+.acc-b:hover {
+  background: #4f8309;
+  border-color: #4f8309;
+  color: #fff;
+}
+
+/* rating buttons: filled when chosen */
+.rate button[data-r="F"][aria-pressed="true"] {
+  background: #4f8309;
+  border-color: #4f8309;
+  color: #fff;
+  box-shadow: 0 1px 3px rgb(79 131 9 / 45%);
+}
+
+.rate button[data-r="P"][aria-pressed="true"] {
+  background: #e0a100;
+  border-color: #e0a100;
+  color: #3b2a00;
+  box-shadow: 0 1px 3px rgb(224 161 0 / 45%);
+}
+
+.rate button[data-r="N"][aria-pressed="true"] {
+  background: #c0392b;
+  border-color: #c0392b;
+  color: #fff;
+  box-shadow: 0 1px 3px rgb(192 57 43 / 45%);
+}
+
+.rate button[data-r="A"][aria-pressed="true"] {
+  background: #5b6b80;
+  border-color: #5b6b80;
+  color: #fff;
+  box-shadow: 0 1px 3px rgb(91 107 128 / 45%);
+}
+
+.rate button:not([aria-pressed="true"]):hover {
+  border-color: #09244f;
+  color: #09244f;
+  background: #f1f4f9;
+}
+
+.row:hover {
+  background: #f6faf0;
+}
+
+.row.sel {
+  background: #eef5e3;
+}
+
+/* summary hero */
+.s-hero {
+  background: linear-gradient(120deg, #ffffff 0%, #f1f6ea 100%);
+  border-left: 4px solid #4f8309;
+}
+
+.score-big {
+  color: #09244f;
+}
+
+/* comment box + transcript */
+.ic {
+  background: linear-gradient(90deg, #eef5e3, #f6faf0);
+  border-left: 4px solid #4f8309;
+}
+
+dialog.brd .brd-bar {
+  background: linear-gradient(120deg, #09244f, #0c3468);
+  color: #fff;
+}
+
+dialog.brd .brd-bar .btn:not(.btn-primary) {
+  background: rgb(255 255 255 / 12%);
+  border-color: rgb(255 255 255 / 50%);
+  color: #fff;
+}
+
+.bulk-note {
+  background: #e3f1d3;
+  border-left: 4px solid #4f8309;
+  color: #2c4d05;
+}
+
+.toast {
+  background: #09244f;
+}
+
+html {
+  background: #f3f6f9;
+}
+
+body {
+  background-attachment: fixed;
+  min-height: 100vh;
+}
